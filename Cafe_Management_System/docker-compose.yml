@@ -1,0 +1,45 @@
+version: '3'
+services:
+database:
+  image: mongo:latest
+  environment:
+    MONGO_INITDB_DATABASE: cafe
+  ports:
+    - "27017:27017"
+    
+  api:
+    image: api
+    ports:
+      - "3001:3001"
+    command: node server.js
+
+  customer_service:
+    image: customer_service
+    ports:
+      - "3002:3002"
+    command: node server.js  
+
+  inventory_service:
+    image: inventory_service
+    ports:
+      - "3003:3003"
+    command: node server.js
+    
+  menu_service:
+    image: menu_service
+    ports:
+      - "3004:3004"
+    command: node server.js
+  order_service:
+    image: order_service
+    ports:
+      - "3005:3005"
+    command: node server.js
+
+    payment_service:
+      image: payment_service
+      ports:
+        - "3006:3006"
+      command: node server.js
+      depends on:
+
